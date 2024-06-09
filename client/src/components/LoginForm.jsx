@@ -26,7 +26,7 @@ const LoginForm = () => {
     }
 
     try {
-      const response = await useMutation(LOGIN_USER,{
+      const response = useMutation(LOGIN_USER,{
         variables:{email: email, password: password}
       });
 
