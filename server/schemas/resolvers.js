@@ -4,13 +4,16 @@ const { signToken, AuthenticationError } = require('../utils/auth');
 
 const resolvers = {
   Query: {
+    searchGoogleBooks: async (parent,{bookName}) => {
+      return fetch(`https://www.googleapis.com/books/v1/volumes?q=${bookName}`);
+    },
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('savedBooks');
     },
   },
 
   Mutation: {
-    createUser: async (parent, { username, email, password }) => {
+    addUser: async (parent, { username, email, password }) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       return { token, user };
