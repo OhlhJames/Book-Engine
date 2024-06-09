@@ -9,7 +9,7 @@ const typeDefs = `
 
   type Auth {
     token: ID!
-    profile: Profile
+    user: User
   }
 
   type Book {
@@ -22,11 +22,13 @@ const typeDefs = `
   }
 
   type Query {
-    user(userId: ID!): Profile
+    searchGoogleBooks(bookName: String!): String
+    user(userId: ID!): User
   }
 
   type Mutation {
-    createUser(name: String!, email: String!, password: String!): Auth
+
+    addUser(name: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
     saveBook: Book
     deleteBook: Book
